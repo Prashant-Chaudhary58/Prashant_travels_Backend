@@ -4,8 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sequelize = require('./database/db');
 const userRoute = require('./routes/userRoute');
-const propertyRoute = require('./routes/propertyRoute');
-const bookingRoute = require('./routes/bookingRoute'); // Add this
+const packageRoute = require('./routes/packageRoute'); 
+const bookingRoute = require('./routes/bookingRoute');
 const path = require('path');
 const multer = require('multer'); // Add this if not already present
 
@@ -75,7 +75,7 @@ app.get('/test', (req, res) => {
 
 // Routes
 app.use('/users', userRoute);
-app.use('/properties', propertyRoute);
+app.use('/package', packageRoute); // Update this to match your route file
 app.use('/api/bookings', bookingRoute); // Add this
 
 // Add 404 handler before error handling middleware
@@ -114,6 +114,9 @@ const startServer = async () => {
     try {
         await sequelize.authenticate();
         console.log('Database connection established.');
+
+        //  require('./models/Packages');
+        //  console.log('Package model loaded successfully.');
         
         // Sync without dropping tables or forcing changes
         await sequelize.sync({ alter: false });

@@ -7,7 +7,7 @@ const Booking = sequelize.define("Bookings", {
     primaryKey: true,
     autoIncrement: true,
   },
-  property_id: {
+  package_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },

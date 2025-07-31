@@ -6,9 +6,9 @@ const bookNow = async (req, res) => {
         console.log('Received booking request:', req.body);
 
         const {
-            propertyId,
+            packageId,
             ownerId,
-            guestId, // Add this
+            guestId, 
             fullName,
             phone,
             guests,
@@ -19,7 +19,7 @@ const bookNow = async (req, res) => {
         } = req.body;
 
         // Validate required fields
-        if (!propertyId || !ownerId || !guestId || !fullName || !phone || !guests || !checkIn || !checkOut) {
+        if (!packageId || !ownerId || !guestId || !fullName || !phone || !guests || !checkIn || !checkOut) {
             return res.status(400).json({
                 success: false,
                 message: 'Missing required fields',
@@ -28,7 +28,7 @@ const bookNow = async (req, res) => {
         }
 
         // Validate data types
-        if (!Number.isInteger(propertyId) || 
+        if (!Number.isInteger(packageId) || 
             typeof ownerId !== 'string' ||
             !Number.isInteger(parseInt(guestId)) || // Changed this line
             typeof fullName !== 'string' ||
@@ -43,7 +43,7 @@ const bookNow = async (req, res) => {
         }
 
         const newBooking = await Booking.create({
-            property_id: propertyId,
+            package_id: packageId,
             owner_id: ownerId,
             guest_id: parseInt(guestId), // Ensure guestId is parsed as integer
             guest_name: fullName,
